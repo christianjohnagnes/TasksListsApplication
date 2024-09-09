@@ -21,7 +21,7 @@
 </ul>
 
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-        <table id="projectsTable" class="table table-striped table-dark"></table>
+    <div class="tab-pane fade show active table-responsive" id="all" role="tabpanel" aria-labelledby="all-tab">
+        <table id="projectsTable" class="table table-striped table-dark table-hover dt-responsive display nowrap" cellspacing="0"></table>
     </div>
 </div>
