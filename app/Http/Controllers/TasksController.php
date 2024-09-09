@@ -38,10 +38,11 @@ class TasksController extends Controller
         return back()->with('status', 'Successfully Updated');
     }
 
-    public function progress($id)
+    public function progress($id, $outcome = null)
     {
-        TodoItem::where('id', $id)->where('user_id', auth()->user()->id)->update(['status' => 'CP']);
-        return back()->with('status', 'Successfully Deleted');
+        $outcome = ($outcome == 'complete') ? 'CP' : 'INC';
+        TodoItem::where('id', $id)->where('user_id', auth()->user()->id)->update(['status' => $outcome]);
+        return back()->with('status', 'Successfully Updated');
     }
 
     public function showDetail($id)
@@ -68,6 +69,9 @@ class TasksController extends Controller
                 switch ($request->category) {
                     case 'completed':
                         $query->where('status', 'CP');
+                        break;
+                    case 'incompleted':
+                        $query->where('status', 'INC');
                         break;
                     case 'overdue':
                         $query->whereDate('due_date', now());
@@ -101,10 +105,16 @@ class TasksController extends Controller
         if ($project->due_date < now()) {
             return 'Overdue';
         } else {
-            if ($project->status == 'PD') {
-                return 'Pending';
-            } else {
-                return 'Completed';
+            switch ($project->status) {
+                case 'PD':
+                    return 'Pending';
+                    break;
+                case 'CP':
+                    return 'Completed';
+                    break;
+                case 'INC':
+                    return 'Incomplete';
+                    break;
             }
         }
     }
@@ -132,14 +142,17 @@ class TasksController extends Controller
     private function actionColumn($id)
     {
         return "
-            <a href='home/tasks/progress/{$id}' class='btn btn-hover-primary'>
+            <a href='home/tasks/progress/{$id}/complete' class='btn btn-hover-primary' title='complete'>
                 <i class='fas fa-check text-success'></i>
+            </a>
+            <a href='home/tasks/progress/{$id}/incomplete' class='btn btn-hover-primary' title='Incomplete'>
+                <i class='fas fa-times text-danger'></i>
             </a> 
-            <a href='javascript:void(0)' class='btn btn-hover-warning edit-btn' data-toggle='modal' data-target='#update_tasks' data-id='{$id}'>
+            <a href='javascript:void(0)' class='btn btn-hover-warning edit-btn' data-toggle='modal' data-target='#update_tasks' data-id='{$id}' title='Edit'>
                 <i class='fas fa-edit text-warning'></i>
             </a>
 
-            <a href='home/tasks/delete/{$id}' class='btn btn-hover-danger'>
+            <a href='home/tasks/delete/{$id}' class='btn btn-hover-danger' title='remove'>
                 <i class='fas fa-trash text-danger'></i>
             </a>
         ";

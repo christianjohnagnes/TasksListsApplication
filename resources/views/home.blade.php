@@ -52,7 +52,37 @@
         pointer-events: none;
     }
 
-    .completed-row td {
+    .incompleted-row td {
+        opacity: 0.3;
+    }
+
+    .incompleted-row {
+        position: relative;
+        background-color: white;
+    }
+
+    .incompleted-row::after {
+        content: 'INCOMPLETE';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: var(--warning);
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 10;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .incompleted-row td {
         opacity: 0.3;
     }
 
@@ -253,11 +283,21 @@
                     api.rows().every(function() {
                         let row = this.node();
                         let data = api.row(row).data();
-                        if (data.status === 'Completed') {
-                            $(row).addClass('completed-row');
-                            $(row).find('.btn').hide(); // Hide action buttons
-                        } else if (data.status == 'Overdue') {
-                            $(row).addClass('overdue-row');
+
+                        switch(data.status) {
+                            case 'Completed':
+                                $(row).addClass('completed-row');
+                                $(row).find('.btn').hide();
+                                break;
+
+                            case 'Incomplete':
+                                $(row).addClass('incompleted-row');
+                                $(row).find('.btn').hide();
+                                break;
+
+                            case 'Overdue':
+                                $(row).addClass('overdue-row');
+                                break;
                         }
                     });
                 }

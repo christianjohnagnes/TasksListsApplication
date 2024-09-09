@@ -6,6 +6,10 @@
         <a class="nav-link" id="completed-tab" data-category="completed" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="true">Completed</a>
     </li>
 
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="incompleted-tab" data-category="incompleted" data-toggle="tab" href="#incompleted" role="tab" aria-controls="incompleted" aria-selected="true">In Complete</a>
+    </li>
+
      <li class="nav-item" role="presentation">
         <a class="nav-link" id="overdue-tab" data-category="overdue" data-toggle="tab" href="#overdue" role="tab" aria-controls="overdue" aria-selected="true">Overdue</a>
     </li>

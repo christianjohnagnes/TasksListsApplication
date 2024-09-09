@@ -29,7 +29,7 @@ Route::prefix('home')->group(function () {
         Route::post('create', [TasksController::class, 'store']);
         Route::post('update', [TasksController::class, 'update']);
         Route::get('show/update/{id}', [TasksController::class, 'showDetail']);
-        Route::get('progress/{id}', [TasksController::class, 'progress']);
+        Route::get('progress/{id}/{outcome}', [TasksController::class, 'progress']);
         Route::get('delete/{id}', [TasksController::class, 'destroy']);
     });
 });
