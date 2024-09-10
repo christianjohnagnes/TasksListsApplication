@@ -18,7 +18,7 @@ This project is intended for an exam. Please do not make any changes to the code
 	1. composer install
     2. Change the filename .env.example to .env
     4. php artisan key:generate
-    5. php artisan migrate
+    5. php artisan migrate "if this caught error:  Unknown database 'laravel'" create a laravel or Laravel database name in mysql
 2. Seed the database:
 	php artisan db:seed Alternatively, you can load the {folder}.test in Laragon or any other similar environment.
 3. Navigate to the "Register" button located at the upper right side of the system.
