@@ -21,14 +21,15 @@ Route::prefix('')->group(function () {
 })->middleware('guest');
 
 Auth::routes();
-
 Route::prefix('home')->group(function () {
     Route::get('', [HomeController::class, 'index'])->name('home');
     Route::prefix('tasks')->group(function () {
-        Route::post('show', [TasksController::class, 'show']);
+        Route::prefix('show')->group(function () {
+            Route::post('', [TasksController::class, 'show']);
+            Route::get('update/{id}', [TasksController::class, 'showDetail']);
+        });
         Route::post('create', [TasksController::class, 'store']);
         Route::post('update', [TasksController::class, 'update']);
-        Route::get('show/update/{id}', [TasksController::class, 'showDetail']);
         Route::get('progress/{id}/{outcome}', [TasksController::class, 'progress']);
         Route::get('delete/{id}', [TasksController::class, 'destroy']);
     });

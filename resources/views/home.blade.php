@@ -4,8 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header"><i class="fas fa-tasks me-2"></i> {{ __('Task List') }} <button href="javascript:void(0)" style="float: right" class="btn btn-outline-primary" data-toggle="modal" data-target="#create_tasks">Create Task</button>
+            <div class="card card-custom card-stretch gutter-b">
+                <div class="card-header border-0 py-5">
+                    <h3 class="card-title align-items-middle">
+                            <span class="card-label font-weight-bolder text-dark"><i class="fas fa-tasks me-2 text-primary"></i> {{ __('Task Lists') }}</span>
+                    </h3>
+                    <div class="card-toolbar">
+                        <button href="javascript:void(0)" style="float: right" class="btn btn-outline-primary" data-toggle="modal" data-target="#create_tasks">Create Task</button>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -35,7 +41,6 @@
         $(document).ready(function (){
             projectDisplay("all");
             $('#myTab li').on('click', function (e) {
-                console.log('test');
                 e.preventDefault();
                 $(this).find('.nav-link').tab('show');
                 projectDisplay($(this).find(".nav-link.active").data('category'));
@@ -145,7 +150,7 @@
                 paging: true,
                 responsive: true,
                 searching: true,
-                ordering: false,
+                ordering: true,
                 lengthChange: false,
                 pageLength: 10,
                 ajax: {
@@ -177,20 +182,19 @@
                     infoEmpty: 'No projects available',
                     infoFiltered: '(filtered from _MAX_ total projects)'
                 },
-                dom: '<"top"f>rt<"bottom"ip><"clear">',
                 drawCallback: function(settings) {
                     let api = this.api();
                     api.rows().every(function() {
                         let row = this.node();
                         let data = api.row(row).data();
 
-                        switch(data.status) {
-                            case 'Completed':
+                        switch(data.status_symbol) {
+                            case 'CP':
                                 $(row).addClass('completed-row');
                                 $(row).find('.btn').hide();
                                 break;
 
-                            case 'Incomplete':
+                            case 'INC':
                                 $(row).addClass('incompleted-row');
                                 $(row).find('.btn').hide();
                                 break;

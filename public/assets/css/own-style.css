@@ -1,5 +1,4 @@
-
-.completed-row {
+.completed-row, .incompleted-row, .overdue-row {
     position: relative;
     background-color: white;
 }
@@ -10,8 +9,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--teal);
+    background: rgba(201, 247, 245, 0.5);
+    color: #1BC5BD;
     font-weight: bold;
     padding: 10px;
     border-radius: 5px;
@@ -25,13 +24,8 @@
     pointer-events: none;
 }
 
-.incompleted-row td {
+.completed-row td {
     opacity: 0.3;
-}
-
-.incompleted-row {
-    position: relative;
-    background-color: white;
 }
 
 .incompleted-row::after {
@@ -40,8 +34,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--warning);
+    background: rgba(255, 226, 229, 0.2);
+    color: var(--bs-danger);
     font-weight: bold;
     padding: 10px;
     border-radius: 5px;
@@ -62,6 +56,7 @@
 .overdue-row {
     position: relative;
     background-color: #ffdddd;
+    text-align: right; /* Aligns all content to the right */
 }
 
 .overdue-row::after {
@@ -85,11 +80,63 @@
     pointer-events: none;
 }
 
-.overdue-row {
-    position: relative;
-    background-color: #ffdddd;
+.overdue-row td {
+    opacity: 0.3;
 }
 
 .overdue-row .btn {
     z-index: 1;
+}
+
+/* Container for pagination */
+.dataTables_paginate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: Arial, sans-serif;
+}
+
+/* Pagination button styling */
+.paginate_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Hover effect for buttons */
+.paginate_button:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Current page button styling */
+.paginate_button.current {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+/* Disabled state for buttons */
+.paginate_button.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+/* Span for page numbers */
+.dataTables_paginate span {
+    display: flex;
+    gap: 4px;
 }
