@@ -13,6 +13,13 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'time_started' => now(),
+        ]);
+    }
+
     public function rules(): array
     {
         return [

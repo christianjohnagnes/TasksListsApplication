@@ -15,6 +15,13 @@ class CreateRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'time_started' => now(),
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
