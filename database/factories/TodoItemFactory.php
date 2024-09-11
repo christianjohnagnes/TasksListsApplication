@@ -25,7 +25,7 @@ class TodoItemFactory extends Factory
             'status' => $this->faker->randomElement(['PD', 'CD']),
             'time_started' => $this->faker->dateTimeThisYear(),
             'time_ended' => $this->faker->dateTimeThisYear(),
-            'due_date' => $this->faker->dateTimeBetween('+1 week', '+1 month')
+            'due_date' => $this->faker->dateTimeBetween('+1 day', '+1 month')
         ];
     }
 }

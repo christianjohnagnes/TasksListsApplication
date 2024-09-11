@@ -47,6 +47,8 @@
 
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active table-responsive" id="all" role="tabpanel" aria-labelledby="all-tab">
-        <table id="projectsTable" class="table dt-responsive display nowrap" cellspacing="0"></table>
+        <table id="projectsTable" class="table dt-responsive table-striped table-hover display nowrap" cellspacing="0">
+            <thead class="thead-dark"></thead>
+        </table>
     </div>
 </div>

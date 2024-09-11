@@ -26,6 +26,7 @@ Route::prefix('home')->group(function () {
     Route::prefix('tasks')->group(function () {
         Route::prefix('show')->group(function () {
             Route::post('', [TasksController::class, 'show']);
+            Route::get('description/{id}', [TasksController::class, 'showDescription']);
             Route::get('update/{id}', [TasksController::class, 'showDetail']);
         });
         Route::post('create', [TasksController::class, 'store']);

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\TodoModel;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueTitleForUserOnStoreRule;
 
 class CreateRequest extends FormRequest
 {
@@ -14,13 +15,6 @@ class CreateRequest extends FormRequest
         return true;
     }
 
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'time_started' => now(),
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,10 +23,9 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','max:255'],
+            'title' => ['required','string','max:255', new UniqueTitleForUserOnStoreRule],
             'description' => ['required','string'],
             'priority' => ['required', 'string'],
-            'time_started' => ['nullable','date'],
             'due_date' => ['required','date','after_or_equal:time_started'],
         ];
     }

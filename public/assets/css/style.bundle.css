@@ -82446,9 +82446,11 @@ body.swal2-height-auto {
   font-size: 0;
 }
 .toast .toast-close-button:before {
-  font-family: Ki;
+  font-family: 'Font Awesome 6 Free';
+  content: "\f00d";
   font-style: normal;
-  font-weight: normal;
+  font-weight: 900;
+  font-size: 0.9rem;
   font-variant: normal;
   line-height: 1;
   text-decoration: inherit;
@@ -82457,7 +82459,6 @@ body.swal2-height-auto {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
-  content: "";
   font-size: 0.9rem;
 }
 .toast .toast-title {

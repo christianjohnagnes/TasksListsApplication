@@ -19,4 +19,11 @@ class TodoItem extends Model
         'time_ended',
         'due_date'
     ];
+
+    public function scopePreventActionIfStatusInOrComplete($query, $id)
+    {
+        return $query->where('id', $id)
+            ->where('user_id', auth()->user()->id)
+            ->whereIn('status', ['CP', 'INC']);
+    }
 }
