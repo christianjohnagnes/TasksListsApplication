@@ -27,9 +27,10 @@ This project is intended for an exam. Please do not make any changes to the code
 4. **Login:**
    - Go to the login page and log in with the credentials you just created.
 5. **Create and Manage Tasks:**
-   - After logging in, you can create tasks by navigating to the left side of the home page.
+   - After logging in, you can create tasks by navigating to the left side middle of the home page.
    - After submitting tasks, you will see them listed next to the "Create Task" button.
    - Actions for each task:
+     - *Note: If you haven’t seen the other icons, please click the first column or the title data to view the rest of the features.*
      - **Check icon:** Complete
      - **Times icon:** Incomplete
      - **Edit icon:** Update task
