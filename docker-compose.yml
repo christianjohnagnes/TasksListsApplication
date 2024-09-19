@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-app:latest
+    container_name: laravel-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/public
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000
+    networks:
+      - app-network
+    depends_on:
+      - db
+    command: php artisan serve --host=0.0.0.0 --port=8000 # Use Laravel's built-in server
+
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    hostname: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: 12345
+      MYSQL_USER: user
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf:ro
+      - ./mysql/secure:/var/run/mysqld
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    networks:
+      - app-network
+
+volumes:
+  dbdata:
+  mysql_run:
+
+networks:
+  app-network:
+    driver: bridge
