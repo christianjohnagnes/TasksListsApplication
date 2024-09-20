@@ -1,0 +1,10 @@
+.git
+.idea
+.vscode
+node_modules
+vendor
+*.log
+*.sqlite
+.env
+.env.*
+storage/*.key
