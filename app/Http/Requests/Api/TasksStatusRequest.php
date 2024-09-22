@@ -1,27 +1,20 @@
 <?php
 
-namespace App\Http\Requests\TodoModel;
+namespace App\Http\Requests\Api;
 
+use App\Rules\EnsureStatusCanBeUpdatedRule;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\UniqueTitleForUserOnStoreRule;
 
-class CreateRequest extends FormRequest
+class TasksStatusRequest extends FormRequest
 {
-    const PRIORITY_LEVELS = ['low', 'medium', 'high'];
 
+    CONST STATUS_LEVEL = ['completed', 'incomplete'];
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
         return true;
-    }
-
-    public function prepareForValidation()
-    {
-        $this->merge([
-            'time_started' => now(),
-        ]);
     }
 
     /**
@@ -32,10 +25,9 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','max:255', new UniqueTitleForUserOnStoreRule],
-            'description' => ['required','string'],
-            'priority' => ['required', 'string', 'in:' . implode(',', self::PRIORITY_LEVELS)],
-            'due_date' => ['required','date', 'date_format:Y-m-d', 'after_or_equal:time_started'],
+            'task_id' => ['required', 'exists:todo_items,id'],
+            'status' => ['required', 'string', 'in:' . implode(',', self::STATUS_LEVEL),  new EnsureStatusCanBeUpdatedRule],
+            'time_ended' => now()
         ];
     }
 
@@ -47,9 +39,7 @@ class CreateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'The title field is required.',
-            'due_date.after_or_equal' => 'The due date must be after or equal to the start time.',
-            'priority.in' => "The selected priority is invalid. selection must be: [" . implode(', ', self::PRIORITY_LEVELS) . "]"
+            'status.in' => "The selected status is invalid. selection must be: [" . implode(', ', self::STATUS_LEVEL) . "]"
         ];
     }
 
