@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: laravel-app:latest
-    container_name: laravel-app
+    image: todo-application-image:latest
+    container_name: todo-application
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -19,14 +19,14 @@ services:
 
   db:
     image: mysql:latest
-    container_name: mysql-db
+    container_name: todo-mysql
     hostname: mysql
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: laravel
+      MYSQL_DATABASE: tododatabase
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_PASSWORD: 12345
-      MYSQL_USER: user
+      MYSQL_USER: todo
     volumes:
       - dbdata:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/my.cnf:ro
